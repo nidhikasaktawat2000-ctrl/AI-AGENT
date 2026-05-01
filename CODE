@@ -1,0 +1,37 @@
+CODE : -
+import streamlit as st
+
+# Title
+st.title("🤖 Smart AI Agent")
+
+st.write("Ask anything (calculate, explain, summary etc.)")
+
+# User input
+user_input = st.text_input("Enter your query:")
+
+# Agent logic
+def agent(user_input):
+    if "calculate" in user_input or "+" in user_input or "-" in user_input:
+        try:
+            expression = user_input.replace("calculate", "")
+            result = eval(expression)
+            return f"🧮 Result: {result}"
+        except:
+            return "⚠️ Calculation error"
+    
+    elif "summary" in user_input:
+        return "📄 This is a short summary of your text."
+    
+    elif "ai" in user_input.lower():
+        return "🤖 AI (Artificial Intelligence) is the simulation of human intelligence in machines."
+    
+    else:
+        return "💡 This is a general AI response."
+
+# Button click
+if st.button("Run Agent"):
+    if user_input:
+        response = agent(user_input)
+        st.success(response)
+    else:
+        st.warning("Please enter something")
